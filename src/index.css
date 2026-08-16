@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 243 75% 59%;
+    --primary-foreground: 210 40% 98%;
+    --primary-glow: 258 90% 66%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 243 75% 59%;
+
+    --radius: 0.75rem;
+
+    --glass-bg: 0 0% 100% / 0.65;
+    --glass-border: 0 0% 100% / 0.4;
+    --shell-bg: 226 60% 97%;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 217 33% 17%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 217 33% 17%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 243 75% 65%;
+    --primary-foreground: 210 40% 98%;
+    --primary-glow: 258 90% 72%;
+
+    --secondary: 217 33% 22%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 22%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 33% 22%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 24%;
+    --input: 217 33% 24%;
+    --ring: 243 75% 65%;
+
+    --glass-bg: 222 47% 14% / 0.6;
+    --glass-border: 210 40% 98% / 0.08;
+    --shell-bg: 222 55% 8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    margin: 0;
+  }
+}
+
+@layer utilities {
+  /* Frosted-glass surface used for the app shell chrome (sidebar/header)
+     and the login card — translucent + blurred so the gradient wash behind
+     it stays visible, matching the "glassmorphism" look requested. */
+  .glass-surface {
+    background-color: hsl(var(--glass-bg));
+    border-color: hsl(var(--glass-border));
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+  }
+
+  .app-shell-bg {
+    background-color: hsl(var(--shell-bg));
+    background-image:
+      radial-gradient(circle at 15% 0%, hsl(var(--primary) / 0.12), transparent 45%),
+      radial-gradient(circle at 100% 20%, hsl(var(--primary-glow) / 0.1), transparent 40%);
+  }
+
+  /* Multi-layer shadow for a sense of depth ("3D") on hover — cheaper and
+     more reliable across the app than a JS pointer-tracking tilt effect. */
+  .shadow-elevated {
+    box-shadow:
+      0 1px 2px hsl(var(--foreground) / 0.04),
+      0 8px 24px -8px hsl(var(--primary) / 0.18),
+      0 24px 48px -24px hsl(var(--foreground) / 0.12);
+  }
+
+  .text-gradient-primary {
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Opt-in hover-lift for cards meant to feel interactive (stat tiles,
+     grid items) — not applied to Card globally since it would jitter
+     large table-wrapping cards on every incidental hover. */
+  .hover-lift {
+    transition:
+      transform 200ms ease,
+      box-shadow 200ms ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-3px);
+  }
+}

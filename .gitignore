@@ -1,0 +1,26 @@
+# Dependencies & build output
+node_modules/
+dist/
+dist-ssr/
+
+# Environment — VITE_ vars are inlined into the bundle at build time, so a
+# committed .env would publish its contents. Only the example is tracked.
+.env
+.env.*
+!.env.example
+
+# Playwright
+playwright-report/
+test-results/
+blob-report/
+.playwright/
+
+# Logs
+*.log
+
+# Editors / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db

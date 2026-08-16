@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "comment": "React Router owns every path client-side, but Vercel looks for a real file first and 404s when there isn't one. Without this, the app works when you navigate in-app but breaks the moment someone reloads on /admin/seats or opens a deep link. Static assets are matched before rewrites, so /assets/* still serves the real files.",
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

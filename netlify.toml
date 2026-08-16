@@ -1,0 +1,21 @@
+# Netlify build + routing config.
+#
+# vercel.json alongside this file does the equivalent job on Vercel; keeping
+# both costs nothing and leaves the app deployable to either host.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# React Router owns every path client-side, but Netlify looks for a real file
+# first and 404s when there isn't one. Without this the app works while
+# navigating in-app, then breaks the moment someone reloads on /admin/seats or
+# opens a deep link. status = 200 rewrites rather than redirects, so the URL
+# in the address bar is preserved for the router to read.
+#
+# This is the LAST rule deliberately: Netlify applies redirects in order, and
+# real files in dist/ (e.g. /assets/*) are matched before it.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
