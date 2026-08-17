@@ -23,7 +23,13 @@ export function MemberBooksPage() {
   })
 
   const books = booksQuery.data?.data ?? []
-  const readLink = (book: (typeof books)[number]) => book.source_url || book.hosted_file || undefined
+  // The hosted copy wins over source_url. These were the wrong way round: for
+  // an imported book, source_url is *provenance* (the publisher's catalogue
+  // page, identical across every NCERT title) — not somewhere to read it. So
+  // every imported book sent members to the same external page instead of the
+  // PDF this library actually holds. source_url is now only the fallback, for
+  // books catalogued as a link with no file attached.
+  const readLink = (book: (typeof books)[number]) => book.hosted_file || book.source_url || undefined
 
   return (
     <div className="space-y-6">
